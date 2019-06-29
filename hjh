@@ -1,0 +1,36 @@
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    google.charts.load("current", {packages:['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ["Dia", "Consumo", { role: "style" } ],
+        ["Lunes", 8.94,"silver" ],
+        ["Martes", 10.49, "silver"],
+        ["Miercoles", 19.30, "silver"],
+        ["Jueves", 21.45, "silver"],
+        ["Viernes", 21.45, "silver"],
+        ["Sabado", 22.45, "silver"],
+        ["Domingo", 23.45, "silver"],
+      ]);
+
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);
+
+      var options = {
+        title: "Consumo Semanal kW-h",
+        width: 600,
+        height: 400,
+        bar: {groupWidth: "95%"},
+        legend: { position: "none" },
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+      chart.draw(view, options);
+  }
+  </script>
+<div id="columnchart_values" style="width: 900px; height: 300px;"></div>
